@@ -22,14 +22,18 @@ const nodeMap = ref([])
 onMounted(() => {
   nodeMap.value = [];
   const ctx = box.value.getContext('2d');
+  //基础网元模块宽高
   const nodeWidth = 40;
   const nodeHeight = 40;
+  //行高宽高
   const rows = props.networkConfig.data.length;
   const cols = props.networkConfig.data[0].length;
+  //平分canvas宽高
   const cellWidth = props.networkConfig.width / cols;
   const cellHeight = props.networkConfig.height / rows;
   const contentWidth = cols * cellWidth;
   const contentHeight = rows * cellHeight;
+  //偏移量
   const offsetX = (props.networkConfig.width - contentWidth) / 2;
   const offsetY = (props.networkConfig.height - contentHeight) / 2;
 
@@ -85,6 +89,7 @@ onMounted(() => {
           img.src = initialImg
         }
         img.onload = () => {
+          // 绘制节点图片
           drawImage(img, x, y, nodeWidth, nodeHeight);
           drawText(cell.name, x, y + nodeHeight + 15, nodeWidth);
         }
